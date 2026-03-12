@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Bitmeme - Bitcoin Meme Coin Launchpad
 
 A simple, user-friendly, and secure platform for launching and investing in Bitcoin meme coins on the Opnet BtC L1 network.
@@ -339,3 +340,7 @@ For questions and support:
 **Made with ❤️ for the Bitcoin meme coin community**
 
 **Bitmeme - Launch Your Dreams! 🚀**
+=======
+# Bitmeme-launchpad
+A launchpad for meme coins on Bitcoin L1 smart contract network
+>>>>>>> e1f9d066600b3bf4c031cff7c4fcc91d44b5281c
