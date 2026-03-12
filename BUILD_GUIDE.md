@@ -115,6 +115,20 @@ signingConfigs {
 }
 ```
 
+### Continuous Integration with GitHub Actions
+A workflow is included at `.github/workflows/release.yml`. It runs whenever you push a tag matching `v*`:
+
+1. Builds desktop installers on Windows, macOS and Linux runners.
+2. Builds the Android release APK and (on macOS) the iOS app.
+3. Collects the resulting binaries and uploads them to a GitHub Release matching the tag.
+
+To publish a new release, simply tag and push from your local repo:
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The generated installers and APK/IPA files will appear under the "Releases" page of your repository.
 ---
 
 ### macOS APP BUILD
