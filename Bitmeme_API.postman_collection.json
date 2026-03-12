@@ -1,0 +1,225 @@
+{
+  "info": {
+    "name": "Bitmeme API",
+    "description": "Bitcoin Meme Coin Launchpad API Collection",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"testuser\",\"email\":\"test@example.com\",\"password\":\"password123\",\"walletAddress\":\"0x742d35Cc6634C0532925a3b844Bc9e7595f42bA1\"}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"test@example.com\",\"password\":\"password123\"}"
+            }
+          }
+        },
+        {
+          "name": "Verify Token",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/auth/verify",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Launchpads",
+      "item": [
+        {
+          "name": "Get All Launchpads",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/launchpad"
+          }
+        },
+        {
+          "name": "Get Launchpad Details",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/launchpad/1"
+          }
+        },
+        {
+          "name": "Create Launchpad",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/launchpad/create",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"tokenConfig\":{\"name\":\"Test Token\",\"symbol\":\"TEST\",\"totalSupply\":\"1000000000\",\"presaleAmount\":\"500000000\",\"presalePrice\":\"0.00001\",\"softcap\":\"10\",\"hardcap\":\"100\",\"ownerAddress\":\"0x742d35Cc6634C0532925a3b844Bc9e7595f42bA1\"}}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Presales",
+      "item": [
+        {
+          "name": "Get All Presales",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/presale"
+          }
+        },
+        {
+          "name": "Get Presale Details",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/presale/1"
+          }
+        },
+        {
+          "name": "Participate in Presale",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/presale/participate",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"presaleId\":\"1\",\"amount\":\"5\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/user/profile",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Portfolio",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/user/portfolio",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Connect Wallet",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/user/connect-wallet",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"walletAddress\":\"0x742d35Cc6634C0532925a3b844Bc9e7595f42bA1\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Smart Contracts",
+      "item": [
+        {
+          "name": "Contribute to Presale",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/smartcontract/contribute",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"launchpadAddress\":\"0x...\",\"amountBTC\":\"5\"}"
+            }
+          }
+        },
+        {
+          "name": "Claim Tokens",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/smartcontract/claim",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"launchpadAddress\":\"0x...\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Launchpad Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/smartcontract/status/0x..."
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

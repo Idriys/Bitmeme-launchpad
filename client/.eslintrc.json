@@ -1,0 +1,11 @@
+module.exports = {
+  files: [
+    {
+      pattern: "src/**/*.{js,jsx,ts,tsx}",
+      handler: "default"
+    }
+  ],
+  linterOptions: {
+    reportUnusedDisableDirectives: "off"
+  }
+}

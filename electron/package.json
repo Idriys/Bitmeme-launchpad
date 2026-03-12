@@ -1,0 +1,124 @@
+{
+  "name": "bitmeme-desktop",
+  "version": "1.0.0",
+  "description": "Bitmeme Bitcoin Meme Coin Launchpad - Desktop App",
+  "main": "src/main.js",
+  "homepage": "./",
+  "author": "Bitmeme Team",
+  "license": "MIT",
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-start": "electron .",
+    "electron-dev": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "npm run react-build && electron-builder",
+    "build-win": "npm run react-build && electron-builder --win",
+    "build-mac": "npm run react-build && electron-builder --mac",
+    "build-linux": "npm run react-build && electron-builder --linux",
+    "build-all": "npm run react-build && electron-builder -mwl",
+    "dev": "npm run electron-dev",
+    "build": "npm run electron-build"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "axios": "^1.6.0",
+    "ethers": "^6.7.1"
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest",
+    "concurrently": "^8.2.1",
+    "wait-on": "^7.0.1",
+    "electron-dev-tools": "latest"
+  },
+  "build": {
+    "appId": "com.bitmeme.launchpad",
+    "productName": "Bitmeme",
+    "files": [
+      "build/**/*",
+      "src/main.js",
+      "src/preload.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        },
+        {
+          "target": "msi",
+          "arch": ["x64"]
+        },
+        "portable"
+      ],
+      "certificateFile": null,
+      "certificatePassword": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Bitmeme"
+    },
+    "msi": {
+      "installerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip",
+        "mas"
+      ],
+      "category": "public.app-category.finance",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist"
+    },
+    "dmg": {
+      "icon": "assets/icon.icns",
+      "iconSize": 120,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220,
+          "type": "file"
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "x": 0,
+        "y": 0,
+        "width": 540,
+        "height": 360
+      }
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Finance"
+    }
+  },
+  "homepage": "./",
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  }
+}

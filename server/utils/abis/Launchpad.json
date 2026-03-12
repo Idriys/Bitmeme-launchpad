@@ -1,0 +1,60 @@
+[
+  {
+    "inputs": [],
+    "name": "contribute",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "_user", "type": "address"}],
+    "name": "claimTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getStatus",
+    "outputs": [
+      {"internalType": "bool", "name": "isActive", "type": "bool"},
+      {"internalType": "uint256", "name": "totalRaised", "type": "uint256"},
+      {"internalType": "uint256", "name": "contributorCount", "type": "uint256"},
+      {"internalType": "uint256", "name": "hardcap", "type": "uint256"},
+      {"internalType": "uint256", "name": "softcap", "type": "uint256"},
+      {"internalType": "uint256", "name": "presaleEndTime", "type": "uint256"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "_user", "type": "address"}],
+    "name": "getUserContribution",
+    "outputs": [
+      {"internalType": "uint256", "name": "amount", "type": "uint256"},
+      {"internalType": "uint256", "name": "tokensClaimed", "type": "uint256"},
+      {"internalType": "uint256", "name": "claimableTokens", "type": "uint256"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "address", "name": "contributor", "type": "address"},
+      {"indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256"},
+      {"indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256"}
+    ],
+    "name": "Contribution",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "address", "name": "user", "type": "address"},
+      {"indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256"}
+    ],
+    "name": "TokensClaimed",
+    "type": "event"
+  }
+]

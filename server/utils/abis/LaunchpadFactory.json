@@ -1,0 +1,34 @@
+[
+  {
+    "inputs": [
+      {"internalType": "string", "name": "_name", "type": "string"},
+      {"internalType": "string", "name": "_symbol", "type": "string"},
+      {"internalType": "uint256", "name": "_totalSupply", "type": "uint256"},
+      {"internalType": "uint256", "name": "_presaleAmount", "type": "uint256"},
+      {"internalType": "uint256", "name": "_presalePrice", "type": "uint256"},
+      {"internalType": "uint256", "name": "_softcap", "type": "uint256"},
+      {"internalType": "uint256", "name": "_hardcap", "type": "uint256"},
+      {"internalType": "uint256", "name": "_presaleStartTime", "type": "uint256"},
+      {"internalType": "uint256", "name": "_presaleEndTime", "type": "uint256"},
+      {"internalType": "uint256", "name": "_listingRate", "type": "uint256"},
+      {"internalType": "uint256", "name": "_listingTime", "type": "uint256"},
+      {"internalType": "uint256", "name": "_liquidityPercent", "type": "uint256"},
+      {"internalType": "address", "name": "_owner", "type": "address"}
+    ],
+    "name": "createLaunchpad",
+    "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "address", "name": "launchpadAddress", "type": "address"},
+      {"indexed": true, "internalType": "address", "name": "owner", "type": "address"},
+      {"indexed": false, "internalType": "string", "name": "name", "type": "string"},
+      {"indexed": false, "internalType": "string", "name": "symbol", "type": "string"}
+    ],
+    "name": "LaunchpadCreated",
+    "type": "event"
+  }
+]
