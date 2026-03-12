@@ -1,0 +1,127 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build desktop/mobile packages
+        run: |
+          set -e
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            npm run build-win
+            npm run build-portable
+            npm run build-msi
+          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
+            npm run build-mac
+          elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+            npm run build-linux
+            cd mobile
+            npm ci
+            npm run prebuild-android
+            ./scripts/build-android.sh release
+            cd ..
+          fi
+        shell: bash
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-artifacts
+          path: |
+            electron/dist/**
+            mobile/android/app/build/outputs/apk/release/*.apk
+            mobile/ios/build/**
+
+  publish:
+    name: Publish Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload installer assets
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/electron/dist/Bitmeme Setup*exe
+          asset_name: "Bitmeme Setup.exe"
+          asset_content_type: application/octet-stream
+
+      - name: Upload portable exe
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/electron/dist/Bitmeme*exe
+          asset_name: "Bitmeme Portable.exe"
+          asset_content_type: application/octet-stream
+
+      - name: Upload DMG (mac)
+        if: runner.os == 'Linux' || runner.os == 'macOS' || runner.os == 'Windows'
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/electron/dist/*.dmg
+          asset_name: "Bitmeme.dmg"
+          asset_content_type: application/octet-stream
+
+      - name: Upload AppImage
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/electron/dist/*.AppImage
+          asset_name: "Bitmeme.AppImage"
+          asset_content_type: application/octet-stream
+
+      - name: Upload Android APK
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/mobile/android/app/build/outputs/apk/release/*.apk
+          asset_name: "Bitmeme-android.apk"
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: Upload iOS build
+        if: runner.os == 'macOS'
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/mobile/ios/build/**/*.app
+          asset_name: "Bitmeme-iOS.app"
+          asset_content_type: application/octet-stream
