@@ -1,6 +1,7 @@
 {
   "name": "bitcoin-meme-launchpad-client",
   "version": "1.0.0",
+  "homepage": "https://ldriys.github.io/Bitmeme-launchpad",
   "description": "Bitcoin Meme Coin Launchpad - Frontend",
   "private": true,
   "dependencies": {
