@@ -1,11 +1,6 @@
-module.exports = {
-  files: [
-    {
-      pattern: "src/**/*.{js,jsx,ts,tsx}",
-      handler: "default"
-    }
-  ],
-  linterOptions: {
-    reportUnusedDisableDirectives: "off"
-  }
+{
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ]
 }
