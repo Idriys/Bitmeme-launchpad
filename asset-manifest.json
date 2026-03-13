@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Bitmeme-launchpad/static/css/main.89170a8b.css",
-    "main.js": "/Bitmeme-launchpad/static/js/main.c055d0a5.js",
+    "main.js": "/Bitmeme-launchpad/static/js/main.256b1697.js",
     "index.html": "/Bitmeme-launchpad/index.html",
     "main.89170a8b.css.map": "/Bitmeme-launchpad/static/css/main.89170a8b.css.map",
-    "main.c055d0a5.js.map": "/Bitmeme-launchpad/static/js/main.c055d0a5.js.map"
+    "main.256b1697.js.map": "/Bitmeme-launchpad/static/js/main.256b1697.js.map"
   },
   "entrypoints": [
     "static/css/main.89170a8b.css",
-    "static/js/main.c055d0a5.js"
+    "static/js/main.256b1697.js"
   ]
 }
